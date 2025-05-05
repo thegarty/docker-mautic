@@ -1,7 +1,7 @@
 #!/bin/bash
 
 chown -R www-data:www-data /var/www/html/config
-chmod -R 775 /var/www/html/config
+chmod -R 777 /var/www/html/config
 
 if [ "$DOCKER_MAUTIC_ROLE" = "mautic_worker" ]; then
 	/entrypoint_mautic_worker.sh
