@@ -12,6 +12,10 @@ internal_port = 80
 auto_deploy = true
 
 [[service.volumes]]
+source = "mautic-main"
+target = "/var/www/html"
+
+[[service.volumes]]
 source = "mautic-config"
 target = "/var/www/html/config"
 
