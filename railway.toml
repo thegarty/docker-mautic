@@ -1,6 +1,6 @@
 [build]
 builder = "DOCKERFILE"
-dockerfilePath = "apache/Dockerfile"
+dockerfilePath = "apache/Dockerfile.railway"
 
 [deploy]
 startCommand = "apache2-foreground"
@@ -9,4 +9,16 @@ restartPolicyMaxRetries = 3
 
 [service]
 internal_port = 80
-auto_deploy = true 
+auto_deploy = true
+
+[[service.volumes]]
+source = "mautic-config"
+target = "/var/www/html/config"
+
+[[service.volumes]]
+source = "mautic-logs"
+target = "/var/www/html/var/logs"
+
+[[service.volumes]]
+source = "mautic-media"
+target = "/var/www/html/docroot/media" 
