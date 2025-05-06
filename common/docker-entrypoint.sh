@@ -2,16 +2,18 @@
 
 set -e
 
-# If /var/www/html is empty (fresh volume), copy codebase from /opt/mautic
+echo "[Entrypoint] Checking if /var/www/html is empty..."
 if [ -z "$(ls -A /var/www/html 2>/dev/null)" ]; then
-    echo "[Entrypoint] /var/www/html is empty, copying Mautic codebase..."
-    cp -a /opt/mautic/. /var/www/html/ && \
+    echo "[Entrypoint] /var/www/html is empty, copying Mautic codebase from /opt/mautic..."
+    cp -a /opt/mautic/. /var/www/html/
     chown -R www-data:www-data /var/www/html
+else
+    echo "[Entrypoint] /var/www/html is not empty, skipping codebase copy."
 fi
 
 echo "[Entrypoint] Fixing permissions for config directory..."
 chown -R www-data:www-data /var/www/html/config
-chmod -R 775 /var/www/html/config
+chmod -R 777 /var/www/html/config
 
 # Run role-specific entrypoint
 case "$DOCKER_MAUTIC_ROLE" in
