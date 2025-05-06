@@ -67,6 +67,7 @@ COPY --from=builder /usr/local/lib/php/extensions /usr/local/lib/php/extensions
 COPY --from=builder /usr/local/etc/php/conf.d/ /usr/local/etc/php/conf.d/
 
 COPY --from=builder --chown=www-data:www-data /opt/mautic /var/www/html
+COPY --from=builder /opt/mautic /opt/mautic
 
 # Install PHP extensions requirements and other dependencies
 RUN apt-get update && apt-get install --no-install-recommends -y \
